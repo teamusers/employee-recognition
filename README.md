@@ -1,20 +1,20 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This is a template for building backend app for any DHL projects
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+1.	Main Software dependencies
+    - NodeJS https://nodejs.org/en/
+    - Git https://git-scm.com/
+2.	Recommended dependencies and other support tools
+    - PostgreSQL https://www.postgresql.org/
+    - Postman https://www.postman.com/
+    - Nodemon (You can install this globally to your machine after NodeJS installation and you can run your app using this https://www.npmjs.com/package/nodemon)
+3.	API references
+    - SmartConnect API (Need to contact DHL tech team to get access for this)
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+To build this backend, point your CLI to your project directory and do the following
+```npm install``` (Do only this if you do not have node_modules on your project)
+```npm start``` or ```nodemon app.js``` if you installed nodemon on your system.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+To test the app, see swagger.yaml for API documentation that contains the basic APIs of this template app
