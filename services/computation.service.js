@@ -61,4 +61,4 @@ class Computation {
     }
 }
 
-module.exports = Computation;
+module.exports = new Computation();

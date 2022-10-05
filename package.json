@@ -23,6 +23,7 @@
     "path": "^0.12.7",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
+    "read-excel-file": "^5.5.0",
     "sequelize": "^6.6.2",
     "sequelize-auto": "^0.8.2"
   },
