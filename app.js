@@ -1,13 +1,13 @@
 "use strict"
 
-require("./config/config")
+// require("./config/config.js")
 
 const express = require('express');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const handleErrors = require('./middlewares/handle-errors.middleware');
 const cors = require('./middlewares/cors.middleware');
-
+const computingRoutes = require('./routes/computation.routes.js');
 
 const port = process.env.PORT || 3000;
 const routePath = './routes/';
@@ -25,6 +25,7 @@ fs.readdirSync(routePath).forEach(function (file) {
   app.use('/v1', routeFile);
 });
 app.use(handleErrors);
+app.use('/api', computingRoutes);
 
 app.get('/', function (req, res) {
   res.status(200).send({success: true});
