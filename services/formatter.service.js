@@ -50,6 +50,37 @@ class Formatter {
         return data
     }
 
+    async parsedToCompute(countries){
+        let inputData = []
+        for (var key in countries) {
+            inputData.push({
+                countryName: key,
+                currentQuarter: {
+                    firstMonth: parseFloat(countries[key]['Oct-2021'].replace('%','')),
+                    secondMonth: parseFloat(countries[key]['Nov-2021'].replace('%','')),
+                    thirdMonth: parseFloat(countries[key]['Dec-2021'].replace('%','')),
+                },
+                pastQuarter: {
+                    firstMonth: parseFloat(countries[key]['Jul-2021'].replace('%','')),
+                    secondMonth: parseFloat(countries[key]['Aug-2021'].replace('%','')),
+                    thirdMonth: parseFloat(countries[key]['Sep-2021'].replace('%','')),
+                }
+            })
+        }
+        return inputData
+    }
+
+    async dataToOut (data){
+        let out = []
+        for (var countryName in data) {
+            out.push({
+                country: countryName,
+                ...data[countryName]
+            })
+        }
+        return out
+    }
+
     async getQuarterlyData(currentMonth,currentYear){
         let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
         let monthInd = months.findIndex(month=> month == currentMonth);

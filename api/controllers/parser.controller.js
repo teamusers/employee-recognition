@@ -3,35 +3,20 @@ const compute = require('./../../services/computation.service.js')
 
 class parser {
     constructor() {
-
+        this.data = []
     }
 
     async getJson(req, res) {
         try{
             let kpi = req.query.kpi
-            let inputData = []
-            let data = await formatter.scorecardToJSON('C:\\Users\\USERPH\\Desktop\\scorecard-summary-export.xlsx')
+            let file = await formatter.scorecardToJSON('C:\\Users\\USERPH\\Desktop\\scorecard-summary-export.xlsx')
+            let parsedData = await formatter.parsedToCompute(file['Global KPI'][kpi].Countries)
+            let IPQ = await compute.computeIPQ(parsedData)
+            let ETM = await compute.computeETM(IPQ)
+            let ETMIPQ = await compute.computeETMIPQ(ETM)
+            let data = await formatter.dataToOut(ETMIPQ)
 
-            for (var key in data['Global KPI'][kpi].Countries) {
-                inputData.push({
-                    countryName: key,
-                    currentQuarter: {
-                        firstMonth: parseFloat(data['Global KPI'][kpi].Countries[key]['Oct-2021'].replace('%','')),
-                        secondMonth: parseFloat(data['Global KPI'][kpi].Countries[key]['Nov-2021'].replace('%','')),
-                        thirdMonth: parseFloat(data['Global KPI'][kpi].Countries[key]['Dec-2021'].replace('%','')),
-                    },
-                    pastQuarter: {
-                        firstMonth: parseFloat(data['Global KPI'][kpi].Countries[key]['Jul-2021'].replace('%','')),
-                        secondMonth: parseFloat(data['Global KPI'][kpi].Countries[key]['Aug-2021'].replace('%','')),
-                        thirdMonth: parseFloat(data['Global KPI'][kpi].Countries[key]['Sep-2021'].replace('%','')),
-                    }
-                })
-            }
-            
-            console.log(inputData)
-
-            res.status(200).send({ success: true, data: await compute.computeIPQ(inputData)});
-
+            res.status(200).send({ success: true, data: data});
         } catch(e){
             console.error(e);
             res.status(400).send({ success: false, reason: "Bad Request" });
