@@ -3,49 +3,49 @@ class Computation {
     constructor() {
         this.countries = [{
             countryName: "Afghanistan",
-            eData: { countryScore: 90, value: 91, points: 30 },
-            tData: { countryScore: 91, value: 91, points: 40 },
-            mData: { countryScore: 92, value: 91, points: 50 }
+            eData: { countryScore: 90, value: 91, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 91, points: 40, ipqResult: 2, ipqValue: 2 },
+            mData: { countryScore: 92, value: 91, points: 50, ipqResult: 3, ipqValue: 3 }
         }, {
             countryName: "Algeria",
-            eData: { countryScore: 90, value: 92, points: 30 },
-            tData: { countryScore: 91, value: 92, points: 40 },
-            mData: { countryScore: 92, value: 92, points: 50 }
+            eData: { countryScore: 90, value: 92, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 92, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 92, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Bahrain",
-            eData: { countryScore: 90, value: 93, points: 30 },
-            tData: { countryScore: 91, value: 93, points: 40 },
-            mData: { countryScore: 92, value: 93, points: 50 }
+            eData: { countryScore: 90, value: 93, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 93, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 93, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Egypt",
-            eData: { countryScore: 90, value: 91, points: 30 },
-            tData: { countryScore: 91, value: 92, points: 40 },
-            mData: { countryScore: 92, value: 93, points: 50 }
+            eData: { countryScore: 90, value: 91, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 92, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 93, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Iran",
-            eData: { countryScore: 90, value: 93, points: 30 },
-            tData: { countryScore: 91, value: 92, points: 40 },
-            mData: { countryScore: 92, value: 91, points: 50 }
+            eData: { countryScore: 90, value: 93, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 92, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 91, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Iraq",
-            eData: { countryScore: 90, value: 92, points: 30 },
-            tData: { countryScore: 91, value: 91, points: 40 },
-            mData: { countryScore: 92, value: 93, points: 50 }
+            eData: { countryScore: 90, value: 92, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 91, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 93, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Jordan",
-            eData: { countryScore: 90, value: 93, points: 30 },
-            tData: { countryScore: 91, value: 91, points: 40 },
-            mData: { countryScore: 92, value: 92, points: 50 }
+            eData: { countryScore: 90, value: 93, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 91, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 92, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Kuwait",
-            eData: { countryScore: 90, value: 92, points: 30 },
-            tData: { countryScore: 91, value: 93, points: 40 },
-            mData: { countryScore: 92, value: 91, points: 50 }
+            eData: { countryScore: 90, value: 92, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 93, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 91, points: 50, ipqResult: 3, ipqValue: 1 }
         }, {
             countryName: "Lebanon",
-            eData: { countryScore: 90, value: 91, points: 30 },
-            tData: { countryScore: 91, value: 93, points: 40 },
-            mData: { countryScore: 92, value: 92, points: 50 }
+            eData: { countryScore: 90, value: 91, points: 30, ipqResult: 1, ipqValue: 1 },
+            tData: { countryScore: 91, value: 93, points: 40, ipqResult: 2, ipqValue: 1 },
+            mData: { countryScore: 92, value: 92, points: 50, ipqResult: 3, ipqValue: 1 }
         }]
     }
 
@@ -127,6 +127,47 @@ class Computation {
                     eData: ePoints,
                     tData: tPoints,
                     mData: mPoints
+                };
+
+                response.push(result);
+            }
+
+            // Return the response
+            return {
+                "code": 0,
+                "message": "success",
+                "result": response
+            }
+        } catch (e) {
+            return {
+                "code": -1,
+                "message": e
+            }
+        }
+    }
+
+    async computeETMIPQ(req, res) {
+        try {
+            let response = [];
+            for (var i = 0; i < this.countries.length; i++) {
+                let country = this.countries[i];
+
+                let eDataIPQ = country.eData.ipqResult;
+                let tDataIPQ = country.tData.ipqResult;
+                let mDataIPQ = country.mData.ipqResult;
+                let eDataIPQValue = country.eData.ipqValue;
+                let tDataIPQValue = country.tData.ipqValue;
+                let mDataIPQValue = country.mData.ipqValue;
+
+                let ePoints = eDataIPQValue >= eDataIPQ && eDataIPQValue < tDataIPQ ? 30 : 0;
+                let tPoints = tDataIPQValue >= tDataIPQ && tDataIPQValue < mDataIPQ ? 40 : 0;
+                let mPoints = mDataIPQValue >= mDataIPQ ? 50 : 0;
+
+                let result = {
+                    country: country.countryName,
+                    e_IPQ: ePoints,
+                    t_IPQ: tPoints,
+                    m_IPQ: mPoints
                 };
 
                 response.push(result);
