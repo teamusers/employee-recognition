@@ -1,7 +1,52 @@
 class Computation {
 
     constructor() {
-        //This is intentional
+        this.countries = [{
+            countryName: "Afghanistan",
+            eData: { countryScore: 90, value: 91, points: 30 },
+            tData: { countryScore: 91, value: 91, points: 40 },
+            mData: { countryScore: 92, value: 91, points: 50 }
+        }, {
+            countryName: "Algeria",
+            eData: { countryScore: 90, value: 92, points: 30 },
+            tData: { countryScore: 91, value: 92, points: 40 },
+            mData: { countryScore: 92, value: 92, points: 50 }
+        }, {
+            countryName: "Bahrain",
+            eData: { countryScore: 90, value: 93, points: 30 },
+            tData: { countryScore: 91, value: 93, points: 40 },
+            mData: { countryScore: 92, value: 93, points: 50 }
+        }, {
+            countryName: "Egypt",
+            eData: { countryScore: 90, value: 91, points: 30 },
+            tData: { countryScore: 91, value: 92, points: 40 },
+            mData: { countryScore: 92, value: 93, points: 50 }
+        }, {
+            countryName: "Iran",
+            eData: { countryScore: 90, value: 93, points: 30 },
+            tData: { countryScore: 91, value: 92, points: 40 },
+            mData: { countryScore: 92, value: 91, points: 50 }
+        }, {
+            countryName: "Iraq",
+            eData: { countryScore: 90, value: 92, points: 30 },
+            tData: { countryScore: 91, value: 91, points: 40 },
+            mData: { countryScore: 92, value: 93, points: 50 }
+        }, {
+            countryName: "Jordan",
+            eData: { countryScore: 90, value: 93, points: 30 },
+            tData: { countryScore: 91, value: 91, points: 40 },
+            mData: { countryScore: 92, value: 92, points: 50 }
+        }, {
+            countryName: "Kuwait",
+            eData: { countryScore: 90, value: 92, points: 30 },
+            tData: { countryScore: 91, value: 93, points: 40 },
+            mData: { countryScore: 92, value: 91, points: 50 }
+        }, {
+            countryName: "Lebanon",
+            eData: { countryScore: 90, value: 91, points: 30 },
+            tData: { countryScore: 91, value: 93, points: 40 },
+            mData: { countryScore: 92, value: 92, points: 50 }
+        }]
     }
 
     async computeIPQ(body){
@@ -59,6 +104,47 @@ class Computation {
             }
         }
     }
+
+    async computeETM(body){
+        try {
+            let response = [];
+            for (var i = 0; i < this.countries.length; i++) {
+                let country = this.countries[i];
+
+                let eDataScore = country.eData.countryScore;
+                let tDataScore = country.tData.countryScore;
+                let mDataScore = country.mData.countryScore;
+                let eDataValue = country.eData.value;
+                let tDataValue = country.tData.value;
+                let mDataValue = country.mData.value;
+
+                let ePoints = eDataValue >= eDataScore && eDataValue < tDataScore ? 30 : 0;
+                let tPoints = tDataValue >= tDataScore && tDataValue < mDataScore ? 40 : 0;
+                let mPoints = mDataValue >= mDataScore ? 50 : 0;
+
+                let result = {
+                    country: country.countryName,
+                    eData: ePoints,
+                    tData: tPoints,
+                    mData: mPoints
+                };
+
+                response.push(result);
+            }
+
+            // Return the response
+            return {
+                "code": 0,
+                "message": "success",
+                "result": response
+            }
+        } catch (e) {
+            return {
+                "code": -1,
+                "message": e
+            }
+        }
+    }
 }
 
-module.exports = new Computation();
+module.exports = Computation;
