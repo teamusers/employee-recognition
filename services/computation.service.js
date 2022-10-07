@@ -14,7 +14,7 @@ class Computation {
         this.maximumGain = 50
     }
 
-    async computeIPQ(body){
+    computeIPQ(body){
         try {
             // Extraction of the entire request
             let request = body;
@@ -63,7 +63,7 @@ class Computation {
         }
     }
 
-    async computeETM(response){
+    computeETM(response){
         try {            
             for (var countryName in response) {
                 let points = 0;
@@ -93,7 +93,7 @@ class Computation {
         }
     }
 
-    async computeETMIPQ(response) {
+    computeETMIPQ(response) {
         try {            
             for (var countryName in response) {
                 let points = 0;

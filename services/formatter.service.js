@@ -4,7 +4,8 @@ const CommonFunctions = require('../util/common-functions.js');
 class Formatter {
 
     constructor() {
-        //This is intentional
+        this.currentQuarter = "Q4 - 2021"
+        this.pastQuarter = "Q3 - 2021"
     }
 
     async scorecardToJSON(file){
@@ -50,7 +51,7 @@ class Formatter {
         return data
     }
 
-    async parsedToCompute(countries){
+    parsedToCompute(countries){
         let inputData = []
         for (var key in countries) {
             inputData.push({
@@ -70,18 +71,20 @@ class Formatter {
         return inputData
     }
 
-    async dataToOut (data){
+    dataToOut (data){
         let out = []
         for (var countryName in data) {
             out.push({
                 country: countryName,
-                ...data[countryName]
+                ...data[countryName],
+                currentQuarter : this.currentQuarter,
+                pastQuarter : this.pastQuarter
             })
         }
         return out
     }
 
-    async getQuarterlyData(currentMonth,currentYear){
+    getQuarterlyData(currentMonth,currentYear){
         let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
         let monthInd = months.findIndex(month=> month == currentMonth);
         let ind = CommonFunctions.lessArrInd(monthInd,11)
