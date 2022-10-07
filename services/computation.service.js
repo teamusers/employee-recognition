@@ -6,8 +6,8 @@ class Computation {
         this.maximumScore = 92
 
         this.entryIPQ = 1
-        this.targetIPQ = 1
-        this.maximumIPQ = 1
+        this.targetIPQ = 3
+        this.maximumIPQ = 4
 
         this.entryGain = 30
         this.targetGain = 40
